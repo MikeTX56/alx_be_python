@@ -9,11 +9,13 @@ def main():
     shopping_list = []
     while True:
         display_menu()
-        try:
-            choice = int(input("Enter your choice: "))
-        except ValueError:
+        choice_input = input("Enter your choice: ")
+
+        if not choice_input.isdigit():
             print("Invalid input. Please enter a number from 1 to 4.")
             continue
+
+        choice = int(choice_input)
 
         if choice == 1:
             item = input("Enter item to add: ")
@@ -28,8 +30,11 @@ def main():
                 print(f"'{item}' not found in the list.")
         elif choice == 3:
             print("Your Shopping List:")
-            for i, item in enumerate(shopping_list, 1):
-                print(f"{i}. {item}")
+            if not shopping_list:
+                print("The list is empty.")
+            else:
+                for i, item in enumerate(shopping_list, 1):
+                    print(f"{i}. {item}")
         elif choice == 4:
             print("Goodbye!")
             break
